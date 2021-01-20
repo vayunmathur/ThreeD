@@ -1,4 +1,5 @@
 #include "GraphicsEngine.h"
+#include "DeviceContext.h"
 #include "SwapChain.h"
 GraphicsEngine::GraphicsEngine()
 {
@@ -19,6 +20,7 @@ bool GraphicsEngine::init()
 		D3D_FEATURE_LEVEL_11_0
 	};
 	UINT num_feature_levels = ARRAYSIZE(feature_levels);
+	ID3D11DeviceContext* m_imm_context;
 
 	HRESULT res = 0;
 	for (UINT driver_type_index = 0; driver_type_index < num_driver_types;)
@@ -34,6 +36,8 @@ bool GraphicsEngine::init()
 		return false;
 	}
 
+	m_imm_device_context = new DeviceContext(m_imm_context);
+
 	m_d3d_device->QueryInterface(__uuidof(IDXGIDevice), (void**)&m_dxgi_device);
 	m_dxgi_device->GetParent(__uuidof(IDXGIAdapter), (void**)&m_dxgi_adapter);
 	m_dxgi_adapter->GetParent(__uuidof(IDXGIFactory), (void**)&m_dxgi_factory);
@@ -48,7 +52,7 @@ bool GraphicsEngine::release()
 	m_dxgi_adapter->Release();
 	m_dxgi_factory->Release();
 
-	m_imm_context->Release();
+	m_imm_device_context->release();
 	m_d3d_device->Release();
 	return true;
 }
@@ -65,4 +69,9 @@ GraphicsEngine* GraphicsEngine::get()
 
 SwapChain* GraphicsEngine::createSwapChain() {
 	return new SwapChain();
+}
+
+DeviceContext* GraphicsEngine::getImmediateDeviceContext()
+{
+	return m_imm_device_context;
 }
