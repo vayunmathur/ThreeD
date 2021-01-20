@@ -151,11 +151,13 @@
     <ClCompile Include="Backend\GraphicsEngine.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Backend\Window.cpp" />
+    <ClCompile Include="Backend\SwapChain.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\AppWindow.h" />
     <ClInclude Include="Backend\Window.h" />
     <ClInclude Include="Backend\GraphicsEngine.h" />
+    <ClInclude Include="Backend\SwapChain.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
