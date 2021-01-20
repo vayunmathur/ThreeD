@@ -1,16 +1,18 @@
 # ThreeD Game Engine
 This is a 3D game engine for Windows. At the moment, this project is just starting, and not many features are implemented yet.
 ### Current Features
-* None
+1. Creating a window
+
+### Currently Working On
+* 3D Graphics Engine
 
 ### Features to come
-1. Creating a window
-2. 3D Graphics Engine
-3. Audio System
-4. GUI System
-5. Entity System
-6. Input System
-7. Fonts
+
+1. Audio System
+2. GUI System
+3. Entity System
+4. Input System
+5. Fonts
 
 ## Getting Started
 ### Installation
