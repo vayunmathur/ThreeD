@@ -1,5 +1,6 @@
 #pragma once
 #include "Backend/Window.h"
+#include "Backend/GraphicsEngine.h"
 class AppWindow : public Window
 {
 public:

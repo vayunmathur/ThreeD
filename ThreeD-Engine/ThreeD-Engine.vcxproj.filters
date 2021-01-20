@@ -24,12 +24,18 @@
     <ClCompile Include="Backend\Window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Backend\GraphicsEngine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\AppWindow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Backend\Window.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Backend\GraphicsEngine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
