@@ -4,6 +4,9 @@
 #include "Backend/SwapChain.h"
 #include "Backend/DeviceContext.h"
 #include "Backend/VertexBuffer.h"
+#include "Backend/VertexShader.h"
+#include "Backend/PixelShader.h"
+
 class AppWindow : public Window
 {
 public:
@@ -17,5 +20,7 @@ public:
 private:
 	SwapChain* m_swap_chain;
 	VertexBuffer* m_vb;
+	VertexShader* m_vs;
+	PixelShader* m_ps;
 };
 

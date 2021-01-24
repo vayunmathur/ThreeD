@@ -9,8 +9,12 @@ This is a 3D game engine for Windows. At the moment, this project is just starti
 1. Rendering Background Color
 2. Render triangles
 3. Render quads
+4. Shaders
 #### TODO
-3. Shaders
+1. Animations
+2. Transformations
+3. Rendering 3D Objects
+4. Camera
 
 ### Features to come
 

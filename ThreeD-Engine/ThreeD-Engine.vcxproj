@@ -154,6 +154,8 @@
     <ClCompile Include="Backend\Window.cpp" />
     <ClCompile Include="Backend\SwapChain.cpp" />
     <ClCompile Include="Backend\VertexBuffer.cpp" />
+    <ClCompile Include="Backend\VertexShader.cpp" />
+    <ClCompile Include="Backend\PixelShader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\AppWindow.h" />
@@ -162,6 +164,8 @@
     <ClInclude Include="Backend\SwapChain.h" />
     <ClInclude Include="Backend\DeviceContext.h" />
     <ClInclude Include="Backend\VertexBuffer.h" />
+    <ClInclude Include="Backend\VertexShader.h" />
+    <ClInclude Include="Backend\PixelShader.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
