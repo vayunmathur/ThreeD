@@ -10,11 +10,11 @@ This is a 3D game engine for Windows. At the moment, this project is just starti
 2. Render triangles
 3. Render quads
 4. Shaders
+5. Animations (using ConstantBuffers)
 #### TODO
-1. Animations
-2. Transformations
-3. Rendering 3D Objects
-4. Camera
+1. Transformations
+2. Rendering 3D Objects
+3. Camera
 
 ### Features to come
 

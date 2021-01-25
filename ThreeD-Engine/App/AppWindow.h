@@ -4,6 +4,7 @@
 #include "Backend/SwapChain.h"
 #include "Backend/DeviceContext.h"
 #include "Backend/VertexBuffer.h"
+#include "Backend/ConstantBuffer.h"
 #include "Backend/VertexShader.h"
 #include "Backend/PixelShader.h"
 
@@ -22,5 +23,6 @@ private:
 	VertexBuffer* m_vb;
 	VertexShader* m_vs;
 	PixelShader* m_ps;
+	ConstantBuffer* m_cb;
 };
 
