@@ -4,6 +4,7 @@
 #include "Engine/GraphicsEngine/SwapChain.h"
 #include "Engine/GraphicsEngine/DeviceContext.h"
 #include "Engine/GraphicsEngine/VertexBuffer.h"
+#include "Engine/GraphicsEngine/IndexBuffer.h"
 #include "Engine/GraphicsEngine/ConstantBuffer.h"
 #include "Engine/GraphicsEngine/VertexShader.h"
 #include "Engine/GraphicsEngine/PixelShader.h"
@@ -24,6 +25,7 @@ public:
 private:
 	SwapChain* m_swap_chain;
 	VertexBuffer* m_vb;
+	IndexBuffer* m_ib;
 	VertexShader* m_vs;
 	PixelShader* m_ps;
 	ConstantBuffer* m_cb;
