@@ -148,26 +148,27 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="App\AppWindow.cpp" />
-    <ClCompile Include="Backend\GraphicsEngine.cpp" />
-    <ClCompile Include="Backend\DeviceContext.cpp" />
-    <ClCompile Include="Backend\ConstantBuffer.cpp" />
+    <ClCompile Include="Engine\GraphicsEngine\GraphicsEngine.cpp" />
+    <ClCompile Include="Engine\GraphicsEngine\DeviceContext.cpp" />
+    <ClCompile Include="Engine\GraphicsEngine\ConstantBuffer.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Backend\Window.cpp" />
-    <ClCompile Include="Backend\SwapChain.cpp" />
-    <ClCompile Include="Backend\VertexBuffer.cpp" />
-    <ClCompile Include="Backend\VertexShader.cpp" />
-    <ClCompile Include="Backend\PixelShader.cpp" />
+    <ClCompile Include="Engine\Window\Window.cpp" />
+    <ClCompile Include="Engine\GraphicsEngine\SwapChain.cpp" />
+    <ClCompile Include="Engine\GraphicsEngine\VertexBuffer.cpp" />
+    <ClCompile Include="Engine\GraphicsEngine\VertexShader.cpp" />
+    <ClCompile Include="Engine\GraphicsEngine\PixelShader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\AppWindow.h" />
-    <ClInclude Include="Backend\Window.h" />
-    <ClInclude Include="Backend\GraphicsEngine.h" />
-    <ClInclude Include="Backend\SwapChain.h" />
-    <ClInclude Include="Backend\DeviceContext.h" />
-    <ClInclude Include="Backend\VertexBuffer.h" />
-    <ClInclude Include="Backend\VertexShader.h" />
-    <ClInclude Include="Backend\PixelShader.h" />
-    <ClInclude Include="Backend\ConstantBuffer.h" />
+    <ClInclude Include="Engine\Math\Vector.h" />
+    <ClInclude Include="Engine\Window\Window.h" />
+    <ClInclude Include="Engine\GraphicsEngine\GraphicsEngine.h" />
+    <ClInclude Include="Engine\GraphicsEngine\SwapChain.h" />
+    <ClInclude Include="Engine\GraphicsEngine\DeviceContext.h" />
+    <ClInclude Include="Engine\GraphicsEngine\VertexBuffer.h" />
+    <ClInclude Include="Engine\GraphicsEngine\VertexShader.h" />
+    <ClInclude Include="Engine\GraphicsEngine\PixelShader.h" />
+    <ClInclude Include="Engine\GraphicsEngine\ConstantBuffer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

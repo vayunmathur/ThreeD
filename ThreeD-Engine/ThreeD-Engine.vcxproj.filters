@@ -21,28 +21,28 @@
     <ClCompile Include="App\AppWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Backend\Window.cpp">
+    <ClCompile Include="Engine\GraphicsEngine\ConstantBuffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Backend\GraphicsEngine.cpp">
+    <ClCompile Include="Engine\GraphicsEngine\DeviceContext.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Backend\SwapChain.cpp">
+    <ClCompile Include="Engine\GraphicsEngine\GraphicsEngine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Backend\DeviceContext.cpp">
+    <ClCompile Include="Engine\GraphicsEngine\PixelShader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Backend\VertexBuffer.cpp">
+    <ClCompile Include="Engine\GraphicsEngine\SwapChain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Backend\VertexShader.cpp">
+    <ClCompile Include="Engine\GraphicsEngine\VertexBuffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Backend\PixelShader.cpp">
+    <ClCompile Include="Engine\GraphicsEngine\VertexShader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Backend\ConstantBuffer.cpp">
+    <ClCompile Include="Engine\Window\Window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -50,28 +50,31 @@
     <ClInclude Include="App\AppWindow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Backend\Window.h">
+    <ClInclude Include="Engine\GraphicsEngine\ConstantBuffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Backend\GraphicsEngine.h">
+    <ClInclude Include="Engine\GraphicsEngine\DeviceContext.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Backend\SwapChain.h">
+    <ClInclude Include="Engine\GraphicsEngine\GraphicsEngine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Backend\DeviceContext.h">
+    <ClInclude Include="Engine\GraphicsEngine\PixelShader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Backend\VertexBuffer.h">
+    <ClInclude Include="Engine\GraphicsEngine\SwapChain.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Backend\VertexShader.h">
+    <ClInclude Include="Engine\GraphicsEngine\VertexBuffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Backend\PixelShader.h">
+    <ClInclude Include="Engine\GraphicsEngine\VertexShader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Backend\ConstantBuffer.h">
+    <ClInclude Include="Engine\Window\Window.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Math\Vector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

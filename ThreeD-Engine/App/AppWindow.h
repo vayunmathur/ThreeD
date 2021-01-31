@@ -1,17 +1,20 @@
 #pragma once
-#include "Backend/Window.h"
-#include "Backend/GraphicsEngine.h"
-#include "Backend/SwapChain.h"
-#include "Backend/DeviceContext.h"
-#include "Backend/VertexBuffer.h"
-#include "Backend/ConstantBuffer.h"
-#include "Backend/VertexShader.h"
-#include "Backend/PixelShader.h"
+#include "Engine/Window/Window.h"
+#include "Engine/GraphicsEngine/GraphicsEngine.h"
+#include "Engine/GraphicsEngine/SwapChain.h"
+#include "Engine/GraphicsEngine/DeviceContext.h"
+#include "Engine/GraphicsEngine/VertexBuffer.h"
+#include "Engine/GraphicsEngine/ConstantBuffer.h"
+#include "Engine/GraphicsEngine/VertexShader.h"
+#include "Engine/GraphicsEngine/PixelShader.h"
 
 class AppWindow : public Window
 {
 public:
 	AppWindow();
+
+	void updateQuadPosition();
+
 	~AppWindow();
 
 	// Inherited via Window
@@ -24,5 +27,12 @@ private:
 	VertexShader* m_vs;
 	PixelShader* m_ps;
 	ConstantBuffer* m_cb;
+private:
+	float m_old_delta;
+	float m_new_delta;
+	float m_delta_time;
+
+	float m_delta_pos;
+	float m_delta_scale;
 };
 
