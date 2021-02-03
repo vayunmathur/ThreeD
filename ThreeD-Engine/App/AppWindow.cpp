@@ -1,6 +1,7 @@
 #include "AppWindow.h"
 #include <Windows.h>
 #include "Engine/Math/Vector.h"
+#include "Engine/InputSystem/InputSystem.h"
 
 struct vertex
 {
@@ -45,18 +46,18 @@ void AppWindow::updateQuadPosition()
 	//temp.setTranslation(vec3::lerp(vec3(-1.5f, -1.5f, 0), vec3(1.5f, 1.5f, 0), m_delta_pos));
 
 	//cc.m_transform *= temp;
-	cc.m_transform.setScale(vec3(1, 1, 1));
+	cc.m_transform.setScale(vec3(m_scale_cube, m_scale_cube, m_scale_cube));
 
 	temp.setIdentity();
-	temp.setRotationZ(m_delta_scale);
+	temp.setRotationZ(0.0f);
 	cc.m_transform *= temp;
 
 	temp.setIdentity();
-	temp.setRotationX(m_delta_scale);
+	temp.setRotationY(m_rot_y);
 	cc.m_transform *= temp;
 
 	temp.setIdentity();
-	temp.setRotationY(m_delta_scale);
+	temp.setRotationX(m_rot_x);
 	cc.m_transform *= temp;
 
 	cc.m_view.setIdentity();
@@ -78,6 +79,9 @@ AppWindow::~AppWindow()
 void AppWindow::onCreate()
 {
 	Window::onCreate();
+
+	InputSystem::get()->addListener(this);
+
 	GraphicsEngine::get()->init();
 	m_swap_chain = GraphicsEngine::get()->createSwapChain();
 	RECT rc = this->getClientWindowRect();
@@ -144,6 +148,9 @@ void AppWindow::onCreate()
 void AppWindow::onUpdate()
 {
 	Window::onUpdate();
+
+	InputSystem::get()->update();
+
 	GraphicsEngine::get()->getImmediateDeviceContext()->clearRenderTargetColor(m_swap_chain, 0, 0.3f, 0.4f, 1);
 
 	RECT rc = this->getClientWindowRect();
@@ -180,4 +187,60 @@ void AppWindow::onDestroy()
 	m_vs->release();
 	m_ps->release();
 	GraphicsEngine::get()->release();
+}
+
+void AppWindow::onFocus()
+{
+	InputSystem::get()->addListener(this);
+}
+
+void AppWindow::onKillFocus()
+{
+	InputSystem::get()->removeListener(this);
+}
+
+void AppWindow::onLeftMouseDown(const Point& mouse_pos)
+{
+	m_scale_cube = 0.5f;
+}
+
+void AppWindow::onLeftMouseUp(const Point& mouse_pos)
+{
+	m_scale_cube = 1.0f;
+}
+
+void AppWindow::onRightMouseDown(const Point& mouse_pos)
+{
+	m_scale_cube = 2.0f;
+}
+
+void AppWindow::onRightMouseUp(const Point& mouse_pos)
+{
+	m_scale_cube = 1.0f;
+}
+
+void AppWindow::onKeyDown(int key)
+{
+	if (key == 'W') {
+		m_rot_x += 0.707f * m_delta_time;
+	}
+	else if (key == 'S') {
+		m_rot_x -= 0.707f * m_delta_time;
+	}
+	if (key == 'A') {
+		m_rot_y += 0.707f * m_delta_time;
+	}
+	else if (key == 'D') {
+		m_rot_y -= 0.707f * m_delta_time;
+	}
+}
+
+void AppWindow::onKeyUp(int key)
+{
+}
+
+void AppWindow::onMouseMove(const Point& delta_mouse_pos)
+{
+	m_rot_x -= delta_mouse_pos.y * m_delta_time;
+	m_rot_y -= delta_mouse_pos.x * m_delta_time;
 }
