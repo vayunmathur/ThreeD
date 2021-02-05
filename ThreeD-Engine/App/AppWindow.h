@@ -9,13 +9,14 @@
 #include "Engine/GraphicsEngine/VertexShader.h"
 #include "Engine/GraphicsEngine/PixelShader.h"
 #include "Engine/InputSystem/InputListener.h"
+#include "Engine/Math/Vector.h"
 
 class AppWindow : public Window, public InputListener
 {
 public:
 	AppWindow();
 
-	void updateQuadPosition();
+	void update();
 
 	~AppWindow();
 
@@ -56,5 +57,10 @@ private:
 	float m_rot_y=0;
 
 	float m_scale_cube = 1;
+
+	float m_forward = 0.0f;
+	float m_rightward = 0.0f;
+
+	mat4 m_world_cam;
 };
 

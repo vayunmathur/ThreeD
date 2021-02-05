@@ -159,9 +159,11 @@
     <ClCompile Include="Engine\GraphicsEngine\VertexBuffer.cpp" />
     <ClCompile Include="Engine\GraphicsEngine\VertexShader.cpp" />
     <ClCompile Include="Engine\GraphicsEngine\PixelShader.cpp" />
+    <ClCompile Include="Engine\GraphicsEngine\RenderSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\AppWindow.h" />
+    <ClInclude Include="Engine\GraphicsEngine\prerequisites.h" />
     <ClInclude Include="Engine\InputSystem\InputListener.h" />
     <ClInclude Include="Engine\Math\Point.h" />
     <ClInclude Include="Engine\Math\Vector.h" />
@@ -175,6 +177,7 @@
     <ClInclude Include="Engine\GraphicsEngine\ConstantBuffer.h" />
     <ClInclude Include="Engine\GraphicsEngine\IndexBuffer.h" />
     <ClInclude Include="Engine\InputSystem\InputSystem.h" />
+    <ClInclude Include="Engine\GraphicsEngine\RenderSystem.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

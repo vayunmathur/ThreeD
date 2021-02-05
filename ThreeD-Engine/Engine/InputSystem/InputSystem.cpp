@@ -21,7 +21,7 @@ void InputSystem::update()
 
 	if (current_mouse_pos.x != m_old_mouse_pos.x || current_mouse_pos.y != m_old_mouse_pos.y) {
 		for (InputListener* l : m_map_listeners) {
-			l->onMouseMove(Point(current_mouse_pos.x - m_old_mouse_pos.x, current_mouse_pos.y - m_old_mouse_pos.y));
+			l->onMouseMove(Point(current_mouse_pos.x, current_mouse_pos.y));
 		}
 		m_old_mouse_pos = Point(current_mouse_pos.x, current_mouse_pos.y);
 	}
@@ -76,6 +76,16 @@ void InputSystem::removeListener(InputListener* listener)
 			break;
 		}
 	}
+}
+
+void InputSystem::setCursorPosition(const Point& pos)
+{
+	::SetCursorPos(pos.x, pos.y);
+}
+
+void InputSystem::showCursor(bool show)
+{
+	::ShowCursor(show);
 }
 
 InputSystem* InputSystem::get()
