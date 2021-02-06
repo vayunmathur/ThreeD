@@ -2,14 +2,8 @@
 #include <Windows.h>
 #include "Engine/Math/Vector.h"
 #include "Engine/InputSystem/InputSystem.h"
-
-struct vertex
-{
-	vec3 position;
-	vec3 position1;
-	vec3 color;
-	vec3 color1;
-};
+#include "Engine/ComponentSystem/CameraComponent.h"
+#include "Engine/ComponentSystem/EntityComponent.h"
 
 __declspec(align(16))
 struct constant
@@ -27,66 +21,17 @@ AppWindow::AppWindow()
 void AppWindow::update()
 {
 	constant cc;
-	cc.m_time = GetTickCount();
+	cc.m_time = GetTickCount64();
 
-	m_delta_pos += m_delta_time / 10.0f;
+	cc.m_transform = getRoot()->get<EntityComponent>("box")->getTransformationMatrix();
 
-	if (m_delta_pos > 1.0f)
-		m_delta_pos = 0;
-
-	mat4 temp;
-
-	//cc.m_transform.setTranslation(vec3::lerp(vec3(-2, -2, 0), vec3(2, 2, 0), m_delta_pos));
-
-
-	m_delta_scale += m_delta_time / 0.55f;
-	
-	//cc.m_transform.setScale(vec3::lerp(vec3(0.5f, 0.5f, 0), vec3(1, 1, 0), (sin(m_delta_scale)+1.0f)/2.0f));
-
-	//temp.setTranslation(vec3::lerp(vec3(-1.5f, -1.5f, 0), vec3(1.5f, 1.5f, 0), m_delta_pos));
-
-	//cc.m_transform *= temp;
-	cc.m_transform.setScale(vec3(m_scale_cube, m_scale_cube, m_scale_cube));
-
-	temp.setIdentity();
-	//temp.setRotationZ(0.0f);
-	cc.m_transform *= temp;
-
-	temp.setIdentity();
-	//temp.setRotationY(m_rot_y);
-	cc.m_transform *= temp;
-
-	temp.setIdentity();
-	//temp.setRotationX(m_rot_x);
-	cc.m_transform *= temp;
-
-	mat4 world_cam;
-	world_cam.setIdentity();
-	temp.setIdentity();
-	temp.setRotationX(m_rot_x);
-	world_cam *= temp;
-	temp.setIdentity();
-	temp.setRotationY(m_rot_y);
-	world_cam *= temp;
-
-
-	vec3 new_pos = m_world_cam.getTranslation() + world_cam.getZDirection() * (m_forward*0.3f) + world_cam.getXDirection() * (m_rightward * 0.3f);
-
-	temp.setTranslation(new_pos);
-	world_cam *= temp;
-	m_world_cam = world_cam;
+	mat4 world_cam = getRoot()->get<CameraComponent>("camera")->getViewMatrix();
 
 	world_cam.inverse();
 
 
 
 	cc.m_view = world_cam;
-	/*cc.m_projection.setOrthoLH(
-		(this->getClientWindowRect().right - this->getClientWindowRect().left) / 400.0f,
-		(this->getClientWindowRect().bottom - this->getClientWindowRect().top) / 400.0f,
-		-4.0f,
-		4.0f
-	);*/
 
 	int width = this->getClientWindowRect().right - this->getClientWindowRect().left;
 	int height = this->getClientWindowRect().bottom - this->getClientWindowRect().top;
@@ -105,14 +50,12 @@ void AppWindow::onCreate()
 {
 	Window::onCreate();
 
-	InputSystem::get()->addListener(this);
+	InputSystem::get()->addListener(getRoot()->get<CameraComponent>("camera").get());
 	InputSystem::get()->showCursor(false);
 
 	GraphicsEngine::get()->init();
 	RECT rc = this->getClientWindowRect();
 	m_swap_chain = GraphicsEngine::get()->getRenderSystem()->createSwapChain(this->m_hwnd, rc.right - rc.left, rc.bottom - rc.top);
-
-	m_world_cam.setTranslation(vec3(0, 0, -2));
 
 	vertex vertex_list[] =
 	{
@@ -126,8 +69,6 @@ void AppWindow::onCreate()
 		{vec3(-0.5f, 0.5f,0.5f),	vec3(0,1,1),	vec3(0,0.2f,0.2f)},
 		{vec3(-0.5f, -0.5f,0.5f),	vec3(0,1,0),	vec3(0,0.2f,0)}
 	};
-
-	UINT size_list = ARRAYSIZE(vertex_list);
 
 	unsigned int index_list[] =
 	{
@@ -145,16 +86,12 @@ void AppWindow::onCreate()
 		1, 0, 7
 	};
 
-	UINT size_index_list = ARRAYSIZE(index_list);
-	m_ib = GraphicsEngine::get()->getRenderSystem()->createIndexBuffer(index_list, size_index_list);
-
-
 	void* shader_byte_code = nullptr;
 	size_t size_shader = 0;
 
 	GraphicsEngine::get()->getRenderSystem()->compileVertexShader(L"VertexShader.hlsl", "vsmain", &shader_byte_code, &size_shader);
 	m_vs = GraphicsEngine::get()->getRenderSystem()->createVertexShader(shader_byte_code, size_shader);
-	m_vb = GraphicsEngine::get()->getRenderSystem()->createVertexBuffer(vertex_list, sizeof(vertex), size_list, shader_byte_code, size_shader);
+	getRoot()->add("box", createComponent<EntityComponent>(vertex_list, ARRAYSIZE(vertex_list), index_list, ARRAYSIZE(index_list), shader_byte_code, size_shader));
 	GraphicsEngine::get()->getRenderSystem()->releaseCompiledShader();
 
 
@@ -174,6 +111,8 @@ void AppWindow::onUpdate()
 
 	InputSystem::get()->update();
 
+	getRoot()->updateAll();
+
 	GraphicsEngine::get()->getRenderSystem()->getImmediateDeviceContext()->clearRenderTargetColor(m_swap_chain, 0, 0.3f, 0.4f, 1);
 
 	RECT rc = this->getClientWindowRect();
@@ -188,10 +127,8 @@ void AppWindow::onUpdate()
 	GraphicsEngine::get()->getRenderSystem()->getImmediateDeviceContext()->setVertexShader(m_vs);
 	GraphicsEngine::get()->getRenderSystem()->getImmediateDeviceContext()->setPixelShader(m_ps);
 
-	GraphicsEngine::get()->getRenderSystem()->getImmediateDeviceContext()->setVertexBuffer(m_vb);
-	GraphicsEngine::get()->getRenderSystem()->getImmediateDeviceContext()->setIndexBuffer(m_ib);
+	getRoot()->renderAll();
 
-	GraphicsEngine::get()->getRenderSystem()->getImmediateDeviceContext()->drawIndexedTriangleList(m_ib->getSizeIndexList(), 0, 0);
 	m_swap_chain->present(false);
 
 	m_old_delta = m_new_delta;
@@ -208,67 +145,10 @@ void AppWindow::onDestroy()
 
 void AppWindow::onFocus()
 {
-	InputSystem::get()->addListener(this);
+	InputSystem::get()->addListener(getRoot()->get<CameraComponent>("camera").get());
 }
 
 void AppWindow::onKillFocus()
 {
-	InputSystem::get()->removeListener(this);
-}
-
-void AppWindow::onLeftMouseDown(const Point& mouse_pos)
-{
-	m_scale_cube = 0.5f;
-}
-
-void AppWindow::onLeftMouseUp(const Point& mouse_pos)
-{
-	m_scale_cube = 1.0f;
-}
-
-void AppWindow::onRightMouseDown(const Point& mouse_pos)
-{
-	m_scale_cube = 2.0f;
-}
-
-void AppWindow::onRightMouseUp(const Point& mouse_pos)
-{
-	m_scale_cube = 1.0f;
-}
-
-void AppWindow::onKeyDown(int key)
-{
-	if (key == 'W') {
-		m_forward = 1.0f;
-		//m_rot_x += 0.707f * m_delta_time;
-	}
-	else if (key == 'S') {
-		m_forward = -1.0f;
-		//m_rot_x -= 0.707f * m_delta_time;
-	}
-	if (key == 'A') {
-		m_rightward = -1.0f;
-		//m_rot_y += 0.707f * m_delta_time;
-	}
-	else if (key == 'D') {
-		m_rightward = 1.0f;
-		//m_rot_y -= 0.707f * m_delta_time;
-	}
-}
-
-void AppWindow::onKeyUp(int key)
-{
-	m_forward = 0.0f;
-	m_rightward = 0.0f;
-}
-
-void AppWindow::onMouseMove(const Point& mouse_pos)
-{
-	int width = this->getClientWindowRect().right - this->getClientWindowRect().left;
-	int height = this->getClientWindowRect().bottom - this->getClientWindowRect().top;
-
-	m_rot_x += (mouse_pos.y - (height / 2.0f)) * m_delta_time*0.3f;
-	m_rot_y += (mouse_pos.x - (width / 2.0f)) * m_delta_time * 0.3f;
-
-	InputSystem::get()->setCursorPosition(Point(width/2, height/2));
+	InputSystem::get()->removeListener(getRoot()->get<CameraComponent>("camera").get());
 }

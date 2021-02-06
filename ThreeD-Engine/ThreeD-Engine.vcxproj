@@ -121,6 +121,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)/ThreeD-Engine</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -148,11 +149,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="App\AppWindow.cpp" />
+    <ClCompile Include="Engine\ComponentSystem\CameraComponent.cpp" />
     <ClCompile Include="Engine\GraphicsEngine\GraphicsEngine.cpp" />
     <ClCompile Include="Engine\GraphicsEngine\DeviceContext.cpp" />
     <ClCompile Include="Engine\GraphicsEngine\ConstantBuffer.cpp" />
     <ClCompile Include="Engine\GraphicsEngine\IndexBuffer.cpp" />
     <ClCompile Include="Engine\InputSystem\InputSystem.cpp" />
+    <ClCompile Include="Engine\ComponentSystem\EntityComponent.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Engine\Window\Window.cpp" />
     <ClCompile Include="Engine\GraphicsEngine\SwapChain.cpp" />
@@ -163,6 +166,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App\AppWindow.h" />
+    <ClInclude Include="Engine\ComponentSystem\CameraComponent.h" />
+    <ClInclude Include="Engine\ComponentSystem\Component.h" />
     <ClInclude Include="Engine\GraphicsEngine\prerequisites.h" />
     <ClInclude Include="Engine\InputSystem\InputListener.h" />
     <ClInclude Include="Engine\Math\Point.h" />
@@ -178,6 +183,8 @@
     <ClInclude Include="Engine\GraphicsEngine\IndexBuffer.h" />
     <ClInclude Include="Engine\InputSystem\InputSystem.h" />
     <ClInclude Include="Engine\GraphicsEngine\RenderSystem.h" />
+    <ClInclude Include="Engine\ComponentSystem\Scene.h" />
+    <ClInclude Include="Engine\ComponentSystem\EntityComponent.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

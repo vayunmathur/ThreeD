@@ -10,8 +10,9 @@
 #include "Engine/GraphicsEngine/PixelShader.h"
 #include "Engine/InputSystem/InputListener.h"
 #include "Engine/Math/Vector.h"
+#include "Engine/ComponentSystem/Scene.h"
 
-class AppWindow : public Window, public InputListener
+class AppWindow : public Window, public Scene
 {
 public:
 	AppWindow();
@@ -26,22 +27,10 @@ public:
 	virtual void onDestroy() override;
 	virtual void onFocus() override;
 	virtual void onKillFocus() override;
-
-	virtual void onLeftMouseDown(const Point& mouse_pos) override;
-	virtual void onLeftMouseUp(const Point& mouse_pos) override;
-
-	virtual void onRightMouseDown(const Point& mouse_pos) override;
-	virtual void onRightMouseUp(const Point& mouse_pos) override;
-
-
-	virtual void onKeyDown(int key);
-	virtual void onKeyUp(int key);
-
-	virtual void onMouseMove(const Point& delta_mouse_pos);
+public:
+	float getDeltaTime() { return m_delta_time; }
 private:
 	SwapChain* m_swap_chain;
-	VertexBuffer* m_vb;
-	IndexBuffer* m_ib;
 	VertexShader* m_vs;
 	PixelShader* m_ps;
 	ConstantBuffer* m_cb;
@@ -52,15 +41,5 @@ private:
 
 	float m_delta_pos;
 	float m_delta_scale;
-
-	float m_rot_x=0;
-	float m_rot_y=0;
-
-	float m_scale_cube = 1;
-
-	float m_forward = 0.0f;
-	float m_rightward = 0.0f;
-
-	mat4 m_world_cam;
 };
 
